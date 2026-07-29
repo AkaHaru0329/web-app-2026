@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>チャットアプリ</title>
+</head>
+<body>
+
+<h1>チャットアプリ</h1>
+
+<div id="messages"></div>
+
+<hr>
+
+<input id="username" placeholder="名前">
+<input id="text" placeholder="メッセージ">
+<button onclick="postMessage()">送信</button>
+
+<script>
+async function getMessages() {
+  const res = await fetch("messages");
+  const messages = await res.json();
+
+  const div = document.getElementById('messages');
+  div.innerHTML = '';
+
+  messages.forEach(msg => {
+    div.innerHTML += `<p><b>${msg.username}</b>：${msg.text}</p>`;
+  });
+}
+
+async function postMessage() {
+  const username = document.getElementById('username').value;
+  const text = document.getElementById('text').value;
+
+  await fetch('/api/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      username,
+      text
+    })
+  });
+
+  document.getElementById('text').value = '';
+
+  getMessages();
+}
+
+getMessages();
+setInterval(getMessages, 3000);
+</script>
+
+</body>
+</html>
