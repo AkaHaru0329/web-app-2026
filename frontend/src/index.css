@@ -1,0 +1,60 @@
+/* ============================================================
+   14-A ステップ2：チャットアプリの見た目
+   Week 5・6 で作った chat.html の <style> をそのまま持ってきたもの。
+
+   frontend/src/index.css の中身を、このファイルで丸ごと置き換える。
+   （Vite が最初に入れている index.css は、背景を暗くしたり中央寄せしたり
+     するので、残しておくと見た目が崩れる）
+   ============================================================ */
+
+body {
+  font-family: sans-serif;
+  max-width: 480px;
+  margin: 40px auto;
+  background: #eef6fa;
+  padding: 0 16px;
+}
+
+h1 {
+  background: #087ea4;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 20px;
+}
+
+form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+button {
+  padding: 8px 14px;
+  background: #087ea4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.messages {
+  list-style: none;
+  padding: 0;
+}
+
+.messages li {
+  background: white;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
