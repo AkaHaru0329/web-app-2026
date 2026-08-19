@@ -4,7 +4,7 @@ const express = require('express');
 const { Pool } = require('pg');
 
 const app = express();
-const PORT = 3000;
+const PORT = 3021;
 
 // JSON形式で送信されたデータを req.body で使えるようにする
 app.use(express.json());
