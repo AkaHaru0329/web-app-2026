@@ -33,7 +33,7 @@ async function postMessage() {
   const username = document.getElementById('username').value;
   const text = document.getElementById('text').value;
 
-  await fetch('/api/messages', {
+  await fetch('api/messages', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
