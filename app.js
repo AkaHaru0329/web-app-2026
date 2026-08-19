@@ -6,12 +6,14 @@ const { Pool } = require('pg');
 const app = express();
 const PORT = 3000;
 
-// JSON形式で送信されたデータをreq.bodyで使えるようにする
+// JSON形式で送信されたデータを req.body で使えるようにする
 app.use(express.json());
 
-// publicフォルダ内のHTML・CSS・JavaScriptを公開する
-app.use(express.static('public'));
+// Reactの本番ビルドを先に公開
 app.use(express.static('frontend/dist'));
+
+// 既存のpublicフォルダを公開
+app.use(express.static('public'));
 
 // PostgreSQLへの接続設定
 const pool = new Pool({
@@ -22,7 +24,7 @@ const pool = new Pool({
   password: process.env.DB_PASSWORD,
 });
 
-// メッセージ一覧を取得する
+// メッセージ一覧を取得
 app.get('/api/messages', async (req, res) => {
   try {
     const result = await pool.query(
@@ -32,13 +34,14 @@ app.get('/api/messages', async (req, res) => {
     res.json(result.rows);
   } catch (error) {
     console.error('メッセージ取得エラー:', error);
+
     res.status(500).json({
       error: 'メッセージの取得に失敗しました',
     });
   }
 });
 
-// 新しいメッセージを保存する
+// 新しいメッセージを保存
 app.post('/api/messages', async (req, res) => {
   try {
     const { username, text } = req.body;
@@ -60,6 +63,7 @@ app.post('/api/messages', async (req, res) => {
     res.status(201).json(result.rows[0]);
   } catch (error) {
     console.error('メッセージ保存エラー:', error);
+
     res.status(500).json({
       error: 'メッセージの保存に失敗しました',
     });
