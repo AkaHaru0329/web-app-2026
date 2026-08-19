@@ -11,6 +11,7 @@ app.use(express.json());
 
 // publicフォルダ内のHTML・CSS・JavaScriptを公開する
 app.use(express.static('public'));
+app.use(express.static('frontend/dist'));
 
 // PostgreSQLへの接続設定
 const pool = new Pool({
