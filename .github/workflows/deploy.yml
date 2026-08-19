@@ -16,8 +16,9 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASS }}
+          script_stop: true
           script: |
-            cd ~/myapp
+            cd ~/akasahi
             git pull origin main
-            npm install --production
+            npm install --omit=dev
             pm2 restart chat
